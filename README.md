@@ -1,6 +1,6 @@
 # Proyecto1_DPO
 
 Integrantes:
-Daniel Vergara
-Maria Clara Aponte
+Daniel Vergara, 
+Maria Clara Aponte, 
 Samuel Reyes
