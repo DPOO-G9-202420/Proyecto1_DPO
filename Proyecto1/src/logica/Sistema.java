@@ -7,11 +7,12 @@ public class Sistema {
     private ArrayList<learningPath> learningPaths;
     
     
-	public Sistema(ArrayList<Usuario> usuarios, ArrayList<learningPath> learningPaths) {
-		this.usuarios = usuarios;
-		this.learningPaths = learningPaths;
+	public Sistema() {
+		this.usuarios = new ArrayList<>();
+		this.learningPaths = new ArrayList<>();
 	}
     
+
 	public boolean registrarUsuario(String login, String contrasena, String tipoUsuario) {
 	    if (buscarUsuario(login) == null) {
 	        if (tipoUsuario.equals("profesor")) {
@@ -27,9 +28,9 @@ public class Sistema {
 	    return false;
 	}
 
-    public Usuario iniciarSesion(String username, String password) {
+    public Usuario iniciarSesion(String username, String contrasena) {
         Usuario usuario = buscarUsuario(username);
-        if (usuario != null && usuario.getContrasena().equals(password)) {
+        if (usuario != null && usuario.getContrasena().equals(contrasena)) {
             return usuario;
         }
         return null;
