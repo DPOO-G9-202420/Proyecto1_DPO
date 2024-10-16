@@ -16,6 +16,7 @@ public class Archivo {
 		for(String texto : textos) {
 			bw.write(texto);
 			bw.write(",");
+			//ARREGLAR NO SIRVE
 
 		}
 		bw.close();
@@ -23,7 +24,7 @@ public class Archivo {
 	
 	public static void escribirUsuarioCSV(Usuario usuario) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("usuarios.csv", true))) {
-            String tipo = usuario.getTipoUsuario();  // "profesor" o "estudiante"
+            String tipo = usuario.getTipoUsuario();
             String linea = usuario.getLogin() + "," + usuario.getContrasena() + "," + tipo;
             writer.write(linea);
             writer.newLine();

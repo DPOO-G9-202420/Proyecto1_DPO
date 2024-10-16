@@ -38,8 +38,8 @@ public class Sistema {
         return false;
     }
 
-    public Usuario iniciarSesion(String username, String contrasena) {
-        Usuario usuario = buscarUsuario(username);
+    public Usuario iniciarSesion(String login, String contrasena) {
+        Usuario usuario = buscarUsuario(login);
         if (usuario != null && usuario.getContrasena().equals(contrasena)) {
             return usuario;
         }
