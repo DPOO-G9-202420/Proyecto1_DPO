@@ -1,16 +1,15 @@
 package logica;
 
 public abstract class Usuario {
-	protected String login;
-	protected String contrasena;
-	protected String tipoUsuario;
+	private String login;
+	private String contrasena;
+	private String tipoUsuario;
 	
 	
-	public Usuario(String login, String contrasena, String tipoUsuario) {
+	public Usuario(String login, String contrasena) {
 		super();
 		this.login = login;
 		this.contrasena = contrasena;
-		this.tipoUsuario = tipoUsuario;
 		
 		
 	}
