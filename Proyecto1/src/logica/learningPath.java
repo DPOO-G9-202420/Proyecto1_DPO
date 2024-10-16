@@ -1,5 +1,6 @@
 package logica;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class learningPath {
@@ -7,10 +8,11 @@ public class learningPath {
 	private String descripcion;
 	private String nivelDificultad;
 	private int duracionMins;
-	private float calificacion;
+	private double calificacion;
 	private Date fechaCreacion;
 	private Date fechaModificacion;
 	private String version;
+	private ArrayList<Actividad> actividades;
 	
 	public learningPath(String titulo, String descripcion, String nivelDificultad, int duracionMins, float calificacion,
 			Date fechaCreacion, Date fechaModificacion, String version) {
@@ -23,6 +25,7 @@ public class learningPath {
 		this.fechaCreacion = fechaCreacion;
 		this.fechaModificacion = fechaModificacion;
 		this.version = version;
+		this.actividades=new ArrayList<>();
 	}
 	
 	public String getTitulo() {
@@ -49,7 +52,7 @@ public class learningPath {
 	public void setDuracionMins(int duracionMins) {
 		this.duracionMins = duracionMins;
 	}
-	public float getCalificacion() {
+	public double getCalificacion() {
 		return calificacion;
 	}
 	public void setCalificacion(float calificacion) {
