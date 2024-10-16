@@ -1,6 +1,11 @@
 package logica;
 
+
+import persistencia.Archivo;
+
+import java.io.IOException;
 import java.util.ArrayList;
+
 
 public class Sistema {
 	private ArrayList<Usuario> usuarios;
@@ -13,20 +18,25 @@ public class Sistema {
 	}
     
 
-	public boolean registrarUsuario(String login, String contrasena, String tipoUsuario) {
-	    if (buscarUsuario(login) == null) {
-	        if (tipoUsuario.equals("profesor")) {
-	            usuarios.add(new Profesor(login, contrasena));
-	        } else if (tipoUsuario.equals("estudiante")) {
-	            usuarios.add(new Estudiante(login, contrasena));
-	        } else {
-	            //exception
-	            return false;
-	        }
-	        return true;
-	    }
-	    return false;
-	}
+    public boolean registrarUsuario(String login, String contrasena, String tipoUsuario) throws IOException {
+        if (buscarUsuario(login) == null) {
+            Usuario nuevoUsuario;
+            if (tipoUsuario.equals("profesor")) {
+                nuevoUsuario = new Profesor(login, contrasena);
+            } else if (tipoUsuario.equals("estudiante")) {
+                nuevoUsuario = new Estudiante(login, contrasena);
+            } else {
+                //System.out.println("Tipo de usuario no válido");
+                return false;
+            }
+            
+            usuarios.add(nuevoUsuario);
+            Archivo.escribirUsuarioCSV(nuevoUsuario);
+            
+            return true;
+        }
+        return false;
+    }
 
     public Usuario iniciarSesion(String username, String contrasena) {
         Usuario usuario = buscarUsuario(username);

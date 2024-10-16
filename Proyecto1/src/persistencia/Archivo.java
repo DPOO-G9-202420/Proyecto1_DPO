@@ -1,4 +1,6 @@
 package persistencia;
+import logica.Sistema;
+import logica.Usuario;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -13,10 +15,22 @@ public class Archivo {
 		BufferedWriter bw = new BufferedWriter(new FileWriter(nombreArchivo));
 		for(String texto : textos) {
 			bw.write(texto);
-			bw.newLine();
+			bw.write(",");
+
 		}
 		bw.close();
 	}
+	
+	public static void escribirUsuarioCSV(Usuario usuario) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("usuarios.csv", true))) {
+            String tipo = usuario.getTipoUsuario();  // "profesor" o "estudiante"
+            String linea = usuario.getLogin() + "," + usuario.getContrasena() + "," + tipo;
+            writer.write(linea);
+            writer.newLine();
+        } catch (IOException e) {
+            System.out.println("Error al escribir en el archivo CSV: " + e.getMessage());
+        }
+    }
 	
 	public static ArrayList<String> leerArchivoCSV(String nombreArchivo) throws IOException{
 		ArrayList<String> textos = new ArrayList<String>();
