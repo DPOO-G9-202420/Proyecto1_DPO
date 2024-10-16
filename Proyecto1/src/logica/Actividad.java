@@ -13,5 +13,6 @@ public abstract class Actividad {
 	protected Actividad prerequisitoSugerido;
 	
 	
+	
 
 }
