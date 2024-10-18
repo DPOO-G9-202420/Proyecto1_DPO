@@ -45,6 +45,11 @@ public class Sistema {
         }
         return null;
     }
+    
+    public void cargarUsuarioCSV() {
+    	Usuario usuario;
+    	
+    }
 
     private Usuario buscarUsuario(String login) {
         for (Usuario u : usuarios) {
