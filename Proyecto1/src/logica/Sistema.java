@@ -50,7 +50,7 @@ public class Sistema {
         return null;
     }
     
-    public void cargarUsuarioCSV() {
+    public void cargarUsuariosCSV() {
         try (BufferedReader reader = new BufferedReader(new FileReader("usuarios.csv"))) {
             String linea;
             while ((linea = reader.readLine()) != null) {

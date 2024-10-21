@@ -17,20 +17,20 @@ public class Principal {
         boolean salir = false;
         
         
-        sistema.cargarUsuarioCSV();
+        sistema.cargarUsuariosCSV();
         //sistema.registrarUsuario("d.vergara112", "dani2004", "profesor");
         //sistema.registrarUsuario("mc.aponte2", "macalister14", "profesor");
         //sistema.registrarUsuario("s.vergara", "roli2006", "estudiante");
         //sistema.registrarUsuario("l.moure", "luciamoure", "estudiante");
         
         while (!salir) {
-            System.out.println("===== Learning Path Recommendation System =====");
-            System.out.println("1. Registrar usuario");
+            System.out.println("---Learning Path Recommendation System---");
+            System.out.println("1. Crear usuario");
             System.out.println("2. Iniciar sesión");
             System.out.println("3. Salir");
             System.out.print("Selecciona una opción: ");
             int opcion = scanner.nextInt();
-            scanner.nextLine();  // Consumir nueva línea
+            scanner.nextLine();
 
             switch (opcion) {
                 case 1:
@@ -43,7 +43,7 @@ public class Principal {
                     salir = true;
                     break;
                 default:
-                    System.out.println("Opción no válida, inténtalo nuevamente.");
+                    System.out.println("Seleccione una opción válida.");
             }
         }
 
@@ -51,7 +51,7 @@ public class Principal {
     }
 	
 	private static void registrarUsuario(Sistema sistema, Scanner scanner) {
-        System.out.println("=== Registrar usuario ===");
+        System.out.println("---Registrar usuario---");
         System.out.print("Nombre de usuario: ");
         String username = scanner.nextLine();
         System.out.print("Contraseña: ");
@@ -67,7 +67,7 @@ public class Principal {
     }
 	
 	private static void iniciarSesion(Sistema sistema, Scanner scanner) {
-        System.out.println("=== Iniciar sesión ===");
+        System.out.println("---Iniciar sesión---");
         System.out.print("Nombre de usuario: ");
         String username = scanner.nextLine();
         System.out.print("Contraseña: ");
@@ -86,7 +86,79 @@ public class Principal {
         }
     }
 	
+	// Método para gestionar opciones de profesor
+    private static void gestionarProfesor(Profesor profesor, Sistema sistema, Scanner scanner) {
+        boolean salir = false;
+
+        while (!salir) {
+            System.out.println("---Menú Profesor---");
+            System.out.println("1. Crear Learning Path");
+            System.out.println("2. Ver Learning Paths");
+            System.out.println("3. Cerrar sesión");
+            System.out.print("Selecciona una opción: ");
+            int opcion = scanner.nextInt();
+            scanner.nextLine();  // Consumir nueva línea
+
+            switch (opcion) {
+                case 1:
+                    System.out.print("Título del Learning Path: ");
+                    String titulo = scanner.nextLine();
+                    System.out.print("Descripción del Learning Path: ");
+                    String descripcion = scanner.nextLine();
+                    System.out.print("Nivel de dificultad: ");
+                    String nivelDificultad = scanner.nextLine();
+                    sistema.crearLearningPath(profesor, titulo, descripcion, nivelDificultad);
+                    System.out.println("Learning Path creado exitosamente.");
+                    break;
+                case 2:
+                    verLearningPaths(sistema);
+                    break;
+                case 3:
+                    salir = true;
+                    break;
+                default:
+                    System.out.println("Opción no válida, inténtalo nuevamente.");
+            }
+        }
+    }
+
+ // Método para gestionar opciones de estudiante
+    private static void gestionarEstudiante(Estudiante estudiante, Sistema sistema, Scanner scanner) {
+        boolean salir = false;
+
+        while (!salir) {
+            System.out.println("---Menú Estudiante---");
+            System.out.println("1. Ver Learning Paths");
+            System.out.println("2. Cerrar sesión");
+            System.out.print("Selecciona una opción: ");
+            int opcion = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (opcion) {
+                case 1:
+                    verLearningPaths(sistema);
+                    break;
+                case 2:
+                    salir = true;
+                    break;
+                default:
+                    System.out.println("Seleccione una opción válida.");
+            }
+        }
+    }
+
+    // Método para mostrar todos los Learning Paths
+    /*
+    private static void verLearningPaths(Sistema sistema) {
+        System.out.println("=== Lista de Learning Paths ===");
+        for (LearningPath lp : sistema.obtenerLearningPaths()) {
+            System.out.println("- " + lp.getTitulo() + " (" + lp.getNivelDificultad() + ")");
+            System.out.println("  Descripción: " + lp.getDescripcion());
+        }
+    }
+}
 	
+	*/
 	
 
         
