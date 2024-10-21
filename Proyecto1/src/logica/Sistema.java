@@ -6,9 +6,9 @@ import persistencia.Archivo;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
+//import java.io.BufferedWriter;
 import java.io.FileReader;
-import java.io.FileWriter;
+//import java.io.FileWriter;
 import java.util.List;
 
 
@@ -87,5 +87,15 @@ public class Sistema {
         return null;
     }
     
+ // Método para crear un Learning Path (solo para profesores)
+    public void crearLearningPath(Profesor profesor, String titulo, String descripcion, String nivelDificultad) {
+        learningPath learningPath = new learningPath(titulo, descripcion, nivelDificultad, profesor);
+        learningPaths.add(learningPath);
+    }
+    
+    // Método para obtener todos los Learning Paths
+    public List<learningPath> obtenerLearningPaths() {
+        return learningPaths;
+    }
 
 }

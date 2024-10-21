@@ -4,9 +4,10 @@ import logica.Sistema;
 import logica.Usuario;
 import logica.Profesor;
 import logica.Estudiante;
+import logica.learningPath;
 
 import java.io.IOException;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -147,18 +148,15 @@ public class Principal {
         }
     }
 
-    // Método para mostrar todos los Learning Paths
-    /*
     private static void verLearningPaths(Sistema sistema) {
         System.out.println("=== Lista de Learning Paths ===");
-        for (LearningPath lp : sistema.obtenerLearningPaths()) {
+        for (learningPath lp : sistema.obtenerLearningPaths()) {
             System.out.println("- " + lp.getTitulo() + " (" + lp.getNivelDificultad() + ")");
             System.out.println("  Descripción: " + lp.getDescripcion());
         }
-    }
+    
 }
 	
-	*/
 	
 
         

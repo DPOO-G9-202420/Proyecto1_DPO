@@ -1,5 +1,5 @@
 package persistencia;
-import logica.Sistema;
+//import logica.Sistema;
 import logica.Usuario;
 
 import java.io.BufferedReader;

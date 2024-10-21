@@ -1,9 +1,8 @@
 package logica;
 
 import java.util.ArrayList;
-import java.util.List;
+//import java.util.List;
 import java.util.Date;
-import java.time.LocalDateTime;
 
 public class learningPath {
 	private String titulo;
@@ -13,20 +12,21 @@ public class learningPath {
 	private double calificacion;
 	private Date fechaCreacion;
 	private Date fechaModificacion;
-	private String version;
+	private int version;
+	private Profesor profesor;
 	private ArrayList<Actividad> actividades;
 	
-	public learningPath(String titulo, String descripcion, String nivelDificultad, int duracionMins, float calificacion,
-			Date fechaCreacion, Date fechaModificacion, String version) {
+	public learningPath(String titulo, String descripcion, String nivelDificultad, Profesor profesor) {
 		super();
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.nivelDificultad = nivelDificultad;
+		this.profesor=profesor;
 		this.duracionMins = 0;
 		this.calificacion = 0.0;
-		this.fechaCreacion = fechaCreacion;
-		this.fechaModificacion = fechaModificacion;
-		this.version = version;
+		this.fechaCreacion = new Date();
+		this.fechaModificacion = new Date();
+		this.version = 1;
 		this.actividades=new ArrayList<>();
 	}
 	
@@ -50,6 +50,12 @@ public class learningPath {
 	public void setNivelDificultad(String nivelDificultad) {
 		this.nivelDificultad = nivelDificultad;
 		actualizarFechaModificacion();
+	}
+	public Profesor getProfesor() {
+		return profesor;
+	}
+	public void setProfesor(Profesor profesor) {
+		this.profesor=profesor;
 	}
 	public int getDuracionMins() {
 		return duracionMins;
@@ -78,10 +84,10 @@ public class learningPath {
 	public void setFechaModificacion(Date fechaModificacion) {
 		this.fechaModificacion = fechaModificacion;
 	}
-	public String getVersion() {
+	public int getVersion() {
 		return version;
 	}
-	public void setVersion(String version) {
+	public void setVersion(int version) {
 		this.version = version;
 	}
 	public ArrayList<Actividad> getActividades(){
