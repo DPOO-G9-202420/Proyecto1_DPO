@@ -1,7 +1,9 @@
 package logica;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Date;
+import java.time.LocalDateTime;
 
 public class learningPath {
 	private String titulo;
@@ -20,8 +22,8 @@ public class learningPath {
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.nivelDificultad = nivelDificultad;
-		this.duracionMins = duracionMins;
-		this.calificacion = calificacion;
+		this.duracionMins = 0;
+		this.calificacion = 0.0;
 		this.fechaCreacion = fechaCreacion;
 		this.fechaModificacion = fechaModificacion;
 		this.version = version;
@@ -33,18 +35,21 @@ public class learningPath {
 	}
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
+		actualizarFechaModificacion();
 	}
 	public String getDescripcion() {
 		return descripcion;
 	}
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+		actualizarFechaModificacion();
 	}
 	public String getNivelDificultad() {
 		return nivelDificultad;
 	}
 	public void setNivelDificultad(String nivelDificultad) {
 		this.nivelDificultad = nivelDificultad;
+		actualizarFechaModificacion();
 	}
 	public int getDuracionMins() {
 		return duracionMins;
@@ -55,8 +60,11 @@ public class learningPath {
 	public double getCalificacion() {
 		return calificacion;
 	}
-	public void setCalificacion(float calificacion) {
-		this.calificacion = calificacion;
+	public void setCalificacion(double nuevaCalificacion) {
+		if (nuevaCalificacion < 0|| nuevaCalificacion>5) {
+			throw new IllegalArgumentException("La calificacion debe estar entre 0 y 5");
+		}
+		this.calificacion = nuevaCalificacion;
 	}
 	public Date getFechaCreacion() {
 		return fechaCreacion;
@@ -76,8 +84,29 @@ public class learningPath {
 	public void setVersion(String version) {
 		this.version = version;
 	}
-
+	public ArrayList<Actividad> getActividades(){
+		return actividades;
+	}
 	
-	
-
+	public void agregarActividad(Actividad actividad) {
+		actividades.add(actividad);
+		actualizarFechaModificacion();
+	}
+	public boolean eliminarActividad(Actividad actividad) {
+		boolean eliminado= actividades.remove(actividad);
+		if (eliminado) {
+			actualizarFechaModificacion();
+		}
+		return eliminado;
+	}
+	public int calcularDuracionLearningPath() {
+		int duracionTotal = 0;
+	    for (Actividad actividad : actividades) {
+	        duracionTotal += actividad.getDuracion();
+	    }
+	    return duracionTotal;
+	}
+	 private void actualizarFechaModificacion() {
+	        this.fechaModificacion = new Date();
+	 }
 }

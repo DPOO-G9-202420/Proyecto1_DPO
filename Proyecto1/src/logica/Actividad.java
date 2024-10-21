@@ -6,7 +6,7 @@ public abstract class Actividad {
 	protected String descripcion;
 	protected String objetivo;
 	protected String nivelDificultad;
-	protected int duracionEsperada;
+	protected int duracion;
 	protected Date fechaLimite;
 	protected boolean esOpcional;
 	protected String estado;
@@ -14,5 +14,7 @@ public abstract class Actividad {
 	
 	
 	
-
+public int getDuracion() {
+	return duracion;
+}
 }
