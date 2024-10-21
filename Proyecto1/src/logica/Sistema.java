@@ -23,7 +23,7 @@ public class Sistema {
 	}
     
 
-    public boolean registrarUsuario(String login, String contrasena, String tipoUsuario) throws IOException {
+    public boolean registrarUsuario(String login, String contrasena, String tipoUsuario) {
         if (buscarUsuario(login) == null) {
             Usuario nuevoUsuario;
             if (tipoUsuario.equals("profesor")) {
@@ -31,7 +31,6 @@ public class Sistema {
             } else if (tipoUsuario.equals("estudiante")) {
                 nuevoUsuario = new Estudiante(login, contrasena);
             } else {
-                //System.out.println("Tipo de usuario no válido");
                 return false;
             }
             
