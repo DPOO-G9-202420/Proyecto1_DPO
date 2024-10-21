@@ -9,8 +9,11 @@ public class Principal {
 	public static void main(String[] args) throws IOException {
         Sistema sistema = new Sistema();
         
-        sistema.registrarUsuario("d.vergara112", "dani2004", "profesor");
-        sistema.registrarUsuario("mc.aponte2", "macalister14", "profesor");
+        sistema.cargarUsuarioCSV();
+        //sistema.registrarUsuario("d.vergara112", "dani2004", "profesor");
+        //sistema.registrarUsuario("mc.aponte2", "macalister14", "profesor");
+        sistema.registrarUsuario("s.vergara", "roli2006", "estudiante");
+        
         
 	}
 }

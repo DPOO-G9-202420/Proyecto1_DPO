@@ -5,6 +5,11 @@ import persistencia.Archivo;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.List;
 
 
 public class Sistema {
@@ -47,9 +52,32 @@ public class Sistema {
     }
     
     public void cargarUsuarioCSV() {
-    	Usuario usuario;
-    	
+        try (BufferedReader reader = new BufferedReader(new FileReader("usuarios.csv"))) {
+            String linea;
+            while ((linea = reader.readLine()) != null) {
+                String[] partes = linea.split(",");
+                if (partes.length == 3) {
+                    String username = partes[0];
+                    String password = partes[1];
+                    String tipoUsuario = partes[2];
+                    Usuario usuario;
+                    if (tipoUsuario.equals("profesor")) {
+                        usuario = new Profesor(username, password);
+                    } else if (tipoUsuario.equals("estudiante")) {
+                        usuario = new Estudiante(username, password);
+                    } else {
+                        System.out.println("Tipo de usuario no válido en el archivo CSV: " + tipoUsuario);
+                        continue;
+                    }
+                    usuarios.add(usuario);  // Agregar usuario a la lista en memoria
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo CSV: " + e.getMessage());
+        }
     }
+    	
+    
 
     private Usuario buscarUsuario(String login) {
         for (Usuario u : usuarios) {
