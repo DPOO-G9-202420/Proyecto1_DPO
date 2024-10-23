@@ -115,4 +115,14 @@ public class learningPath {
 	 private void actualizarFechaModificacion() {
 	        this.fechaModificacion = new Date();
 	 }
+	 
+	 public Actividad getUltimaActividad(){
+		 if (!actividades.isEmpty()) {
+	            Actividad ultimoElemento = actividades.get(actividades.size() - 1);
+	            return ultimoElemento;
+		 }
+		 else {return null;}
+	 }
+	         
+
 }

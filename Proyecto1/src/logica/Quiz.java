@@ -8,7 +8,7 @@ public class Quiz extends Actividad{
 	private float calificacionMinima;
 	
 	public Quiz(String nombre, String descripcion, String objetivo, String nivelDificultad, int duracion,
-			Date fechaLimite, boolean esOpcional, Actividad prerequisitoSugerido) {
+			String fechaLimite, boolean esOpcional, Actividad prerequisitoSugerido) {
 		super(nombre, descripcion, objetivo, nivelDificultad, duracion, fechaLimite, esOpcional, prerequisitoSugerido);
 		this.preguntas=preguntas;
 		this.calificacionMinima=calificacionMinima;
@@ -16,16 +16,15 @@ public class Quiz extends Actividad{
 	}
 
 	@Override
-    public String iniciarActividad() {
+    public void iniciarActividad() {
         // Implementación de la lógica para realizar el quiz
-        return "Realizando quiz: " + getNombre();
     }
 
-    public int getCalificacionMinima() {
+    public float getCalificacionMinima() {
         return calificacionMinima;
     }
 
-    public ArrayList<String> getPreguntas() {
+    public ArrayList<Pregunta> getPreguntas() {
         return preguntas;
     }
 	

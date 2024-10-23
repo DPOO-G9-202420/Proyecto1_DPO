@@ -11,7 +11,7 @@ public class Tarea extends Actividad{
 	
 	
 	public Tarea(String nombre, String descripcion, String objetivo, String nivelDificultad, int duracion,
-			Date fechaLimite, boolean esOpcional, Actividad prerequisitoSugerido) {
+			String fechaLimite, boolean esOpcional, Actividad prerequisitoSugerido) {
 		super(nombre, descripcion, objetivo, nivelDificultad, duracion, fechaLimite, esOpcional, prerequisitoSugerido);
 		this.metodoEntrega=metodoEntrega;
 		this.estado=estado;

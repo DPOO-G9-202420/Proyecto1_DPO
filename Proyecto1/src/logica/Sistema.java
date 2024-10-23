@@ -5,24 +5,26 @@ import persistencia.Archivo;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.List;
 import java.util.Scanner;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 
 public class Sistema {
 	private ArrayList<Usuario> usuarios;
     private ArrayList<learningPath> learningPaths;
-    private ArrayList<String> profesores;
     
     
 	public Sistema() {
 		this.usuarios = new ArrayList<>();
 		this.learningPaths = new ArrayList<>();
-		this.profesores=new ArrayList<String>();
+
 		
 	}
     
@@ -120,6 +122,10 @@ public class Sistema {
     
     
     public void agregarActividad(Profesor profesor, learningPath learningPath) {
+    	
+    	SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+        formatoFecha.setLenient(false);
+        boolean esOpcionalQuiz;
 
         if (learningPath != null && learningPath.getProfesor().equals(profesor)) {
             Scanner scanner = new Scanner(System.in);
@@ -139,16 +145,18 @@ public class Sistema {
                     String nivelDificultadQuiz = scanner.nextLine();
                     System.out.println("Ingrese la duración en minutos:");
                     int duracionQuiz = scanner.nextInt();
-                    System.out.println("Ingrese la fecha limite :");
-                    String fechaLimiteQuiz = scanner.nextLine();
+                    System.out.println("Ingrese la fecha limite (dd/mm/yyyy/):");
+                    String fechaString = scanner.nextLine();
                     System.out.println("Es opcional? (si/no) :");
-                    String esOpcionalQuiz = scanner.nextLine();
-                    System.out.println("Que actividad es un prerrequisito sugerido? :");
-                    String prerequisitoSugerido = scanner.nextLine();
+                    String esOpcionalQuizTxt = scanner.nextLine();
+                    if (esOpcionalQuizTxt=="si") {
+                    	esOpcionalQuiz=true;
+                    }
+                    else {esOpcionalQuiz=false;}
                     
-                    scanner.nextLine();
-                    // Aquí agregamos más detalles del Quiz, como las preguntas, respuestas y calificación mínima...
-                    Quiz quiz = new Quiz(nombreQuiz, descripcionQuiz, objetivoQuiz,nivelDificultadQuiz, duracionQuiz, fechaLimiteQuiz,esOpcionalQuiz,prerequisitoSugerido);
+                    //scanner.nextLine();
+                    Actividad prerequisitoSugerido=learningPath.getUltimaActividad();
+                    Quiz quiz = new Quiz(nombreQuiz, descripcionQuiz, objetivoQuiz,nivelDificultadQuiz, duracionQuiz, fechaString,esOpcionalQuiz,prerequisitoSugerido);
                     learningPath.agregarActividad(quiz);
                     System.out.println("Quiz agregado con éxito.");
                     break;
@@ -166,8 +174,8 @@ public class Sistema {
                     String instruccionesTarea = scanner.nextLine();
                     System.out.println("Ingrese el medio de entrega:");
                     String medioEntrega = scanner.nextLine();
-                    Tarea tarea = new Tarea(tituloTarea, descripcionTarea, nivelDificultadTarea, duracionTarea, instruccionesTarea, medioEntrega);
-                    learningPath.agregarActividad(tarea);
+                    //Tarea tarea = new Tarea(tituloTarea, descripcionTarea, nivelDificultadTarea, duracionTarea, instruccionesTarea, medioEntrega);
+                    //learningPath.agregarActividad(tarea);
                     System.out.println("Tarea agregada con éxito.");
                     break;
                 case 3: // Agregar Revisión de Recurso
@@ -184,8 +192,8 @@ public class Sistema {
                     String tipoRecurso = scanner.nextLine();
                     System.out.println("Ingrese el enlace al recurso:");
                     String enlaceRecurso = scanner.nextLine();
-                    RevisarRecurso recurso = new RevisarRecurso(tituloRecurso, descripcionRecurso, nivelDificultadRecurso, duracionRecurso, tipoRecurso, enlaceRecurso);
-                    learningPath.agregarActividad(recurso);
+                    //RevisarRecurso recurso = new RevisarRecurso(tituloRecurso, descripcionRecurso, nivelDificultadRecurso, duracionRecurso, tipoRecurso, enlaceRecurso);
+                    //learningPath.agregarActividad(recurso);
                     System.out.println("Recurso agregado con éxito.");
                     break;
                 default:
@@ -198,7 +206,7 @@ public class Sistema {
     }
 
     // BUSCAR
-    private learningPath buscarLearningPathPorTitulo(String titulo) {
+    public learningPath buscarLearningPathPorTitulo(String titulo) {
         for (learningPath lp : learningPaths) {
             if (lp.getTitulo().equalsIgnoreCase(titulo)) {
                 return lp;

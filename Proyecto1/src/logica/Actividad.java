@@ -8,12 +8,12 @@ public abstract class Actividad {
 	protected String objetivo;
 	protected String nivelDificultad;
 	protected int duracion;
-	protected Date fechaLimite;
+	protected String fechaLimite;
 	protected boolean esOpcional;
 	protected boolean estado;
 	protected Actividad prerequisitoSugerido;
 	
-	public Actividad(String nombre, String descripcion, String objetivo, String nivelDificultad, int duracion, Date fechaLimite, boolean esOpcional, Actividad prerequisitoSugerido) {
+	public Actividad(String nombre, String descripcion, String objetivo, String nivelDificultad, int duracion, String fechaLimite, boolean esOpcional, Actividad prerequisitoSugerido) {
 		super();
 		this.nombre=nombre;
 		this.descripcion=descripcion;
@@ -50,10 +50,10 @@ public abstract class Actividad {
 	public void setNivelDificultad(String nivelDificultad) {
 		this.nivelDificultad = nivelDificultad;
 	}
-	public Date getFechaLimite() {
+	public String getFechaLimite() {
 		return fechaLimite;
 	}
-	public void setFechaLimite(Date fechaLimite) {
+	public void setFechaLimite(String fechaLimite) {
 		this.fechaLimite = fechaLimite;
 	}
 	public boolean isEsOpcional() {
