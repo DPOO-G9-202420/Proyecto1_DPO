@@ -151,9 +151,11 @@ public class Principal {
 
     private static void verLearningPaths(Sistema sistema) {
         System.out.println("=== Lista de Learning Paths ===");
+        int i=1;
         for (learningPath lp : sistema.obtenerLearningPaths()) {
-            System.out.println("- " + lp.getTitulo() + " (" + lp.getNivelDificultad() + ")");
+            System.out.println(i+". "+ lp.getTitulo() + " (" + lp.getNivelDificultad() + ")");
             System.out.println("  Descripción: " + lp.getDescripcion());
+            i++;
         }
     
 }

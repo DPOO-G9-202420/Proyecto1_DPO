@@ -139,5 +139,89 @@ public class Sistema {
         return null;  // Si no se encuentra el profesor, podrías lanzar una excepción o manejar el caso
     }
     
+    public void agregarActividadALearningPath(Profesor profesor, String tituloLearningPath) {
+        learningPath learningPath = buscarLearningPathPorTitulo(tituloLearningPath);
+
+        if (learningPath != null && learningPath.getCreador().equals(profesor)) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("¿Qué tipo de actividad deseas agregar? (1. Quiz, 2. Tarea, 3. Revisar Recurso)");
+            int opcion = scanner.nextInt();
+            scanner.nextLine(); // Consumir la nueva línea
+
+            switch (opcion) {
+                case 1: // Agregar Quiz
+                    System.out.println("Ingrese el título del Quiz:");
+                    String tituloQuiz = scanner.nextLine();
+                    System.out.println("Ingrese la descripción del Quiz:");
+                    String descripcionQuiz = scanner.nextLine();
+                    System.out.println("Ingrese el nivel de dificultad:");
+                    String nivelDificultadQuiz = scanner.nextLine();
+                    System.out.println("Ingrese la duración en minutos:");
+                    int duracionQuiz = scanner.nextInt();
+                    scanner.nextLine(); // Consumir la nueva línea
+                    // Aquí agregamos más detalles del Quiz, como las preguntas, respuestas y calificación mínima...
+                    Quiz quiz = new Quiz(tituloQuiz, descripcionQuiz, nivelDificultadQuiz, duracionQuiz, /* otras propiedades */);
+                    learningPath.agregarActividad(quiz);
+                    System.out.println("Quiz agregado con éxito.");
+                    break;
+                case 2: // Agregar Tarea
+                    System.out.println("Ingrese el título de la Tarea:");
+                    String tituloTarea = scanner.nextLine();
+                    System.out.println("Ingrese la descripción de la Tarea:");
+                    String descripcionTarea = scanner.nextLine();
+                    System.out.println("Ingrese el nivel de dificultad:");
+                    String nivelDificultadTarea = scanner.nextLine();
+                    System.out.println("Ingrese la duración en minutos:");
+                    int duracionTarea = scanner.nextInt();
+                    scanner.nextLine(); // Consumir la nueva línea
+                    System.out.println("Ingrese las instrucciones de la Tarea:");
+                    String instruccionesTarea = scanner.nextLine();
+                    System.out.println("Ingrese el medio de entrega:");
+                    String medioEntrega = scanner.nextLine();
+                    Tarea tarea = new Tarea(tituloTarea, descripcionTarea, nivelDificultadTarea, duracionTarea, instruccionesTarea, medioEntrega);
+                    learningPath.agregarActividad(tarea);
+                    System.out.println("Tarea agregada con éxito.");
+                    break;
+                case 3: // Agregar Revisión de Recurso
+                    System.out.println("Ingrese el título del recurso:");
+                    String tituloRecurso = scanner.nextLine();
+                    System.out.println("Ingrese la descripción del recurso:");
+                    String descripcionRecurso = scanner.nextLine();
+                    System.out.println("Ingrese el nivel de dificultad:");
+                    String nivelDificultadRecurso = scanner.nextLine();
+                    System.out.println("Ingrese la duración en minutos:");
+                    int duracionRecurso = scanner.nextInt();
+                    scanner.nextLine(); // Consumir la nueva línea
+                    System.out.println("Ingrese el tipo de recurso (video, libro, pdf, etc.):");
+                    String tipoRecurso = scanner.nextLine();
+                    System.out.println("Ingrese el enlace al recurso:");
+                    String enlaceRecurso = scanner.nextLine();
+                    RevisarRecurso recurso = new RevisarRecurso(tituloRecurso, descripcionRecurso, nivelDificultadRecurso, duracionRecurso, tipoRecurso, enlaceRecurso);
+                    learningPath.agregarActividad(recurso);
+                    System.out.println("Recurso agregado con éxito.");
+                    break;
+                default:
+                    System.out.println("Opción no válida.");
+                    break;
+            }
+        } else {
+            System.out.println("No tienes permisos para editar este Learning Path o no existe.");
+        }
+    }
+
+    // Método auxiliar para buscar un Learning Path por título
+    private learningPath buscarLearningPathPorTitulo(String titulo) {
+        for (learningPath lp : learningPaths) {
+            if (lp.getTitulo().equalsIgnoreCase(titulo)) {
+                return lp;
+            }
+        }
+        return null;
+    }
+
+
 
 }
+    
+
+
