@@ -15,13 +15,13 @@ import java.util.List;
 public class Sistema {
 	private ArrayList<Usuario> usuarios;
     private ArrayList<learningPath> learningPaths;
-    private List<Profesor> profesores;
+    private List<String> profesores;
     
     
 	public Sistema() {
 		this.usuarios = new ArrayList<>();
 		this.learningPaths = new ArrayList<>();
-		this.profesores=new ArrayList<Profesor>();
+		this.profesores=new ArrayList<String>();
 		
 	}
     
@@ -106,7 +106,6 @@ public class Sistema {
     public void cargarLearningPathsDesdeCSV() {
         try (BufferedReader reader = new BufferedReader(new FileReader("lp.csv"))) {
             String linea;
-            reader.readLine(); // Saltar la cabecera
 
             while ((linea = reader.readLine()) != null) {
                 String[] campos = linea.split(",");
@@ -118,7 +117,7 @@ public class Sistema {
                 String loginCreador = campos[3];
 
                 // Buscar al creador en la lista de profesores
-                Profesor creador = buscarProfesorPorNombre(loginCreador);
+                Profesor creador = (Profesor) buscarProfesorPorNombre(loginCreador);
 
                 // Crear instancia de Learning Path
                 learningPath lp = new learningPath(titulo, descripcion, nivelDificultad, creador);
@@ -131,10 +130,10 @@ public class Sistema {
         }
     }
     
-    public Profesor buscarProfesorPorNombre(String login) {
-        for (Profesor profesor : profesores) {
-            if (profesor.getLogin().equals(login)) {
-                return profesor;
+    public Usuario buscarProfesorPorNombre(String login) {
+        for (Usuario usuario : usuarios) {
+            if (usuario.getLogin().equals(login)) {
+                return usuario;
             }
         }
         return null;  // Si no se encuentra el profesor, podrías lanzar una excepción o manejar el caso
