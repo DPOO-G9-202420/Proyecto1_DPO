@@ -15,11 +15,14 @@ import java.util.List;
 public class Sistema {
 	private ArrayList<Usuario> usuarios;
     private ArrayList<learningPath> learningPaths;
+    private List<Profesor> profesores;
     
     
 	public Sistema() {
 		this.usuarios = new ArrayList<>();
 		this.learningPaths = new ArrayList<>();
+		this.profesores=new ArrayList<Profesor>();
+		
 	}
     
 
@@ -62,6 +65,7 @@ public class Sistema {
                     Usuario usuario;
                     if (tipoUsuario.equals("profesor")) {
                         usuario = new Profesor(username, password);
+                        
                     } else if (tipoUsuario.equals("estudiante")) {
                         usuario = new Estudiante(username, password);
                     } else {
@@ -89,13 +93,52 @@ public class Sistema {
     
  // Método para crear un Learning Path (solo para profesores)
     public void crearLearningPath(Profesor profesor, String titulo, String descripcion, String nivelDificultad) {
-        learningPath learningPath = new learningPath(titulo, descripcion, nivelDificultad, profesor);
-        learningPaths.add(learningPath);
+        learningPath lp = new learningPath(titulo, descripcion, nivelDificultad, profesor);
+        learningPaths.add(lp);
+        Archivo.guardarLearningPathEnCSV(lp);
     }
     
     // Método para obtener todos los Learning Paths
     public List<learningPath> obtenerLearningPaths() {
         return learningPaths;
     }
+    
+    public void cargarLearningPathsDesdeCSV() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("lp.csv"))) {
+            String linea;
+            reader.readLine(); // Saltar la cabecera
+
+            while ((linea = reader.readLine()) != null) {
+                String[] campos = linea.split(",");
+
+                // Obtener datos del Learning Path
+                String titulo = campos[0];
+                String descripcion = campos[1];
+                String nivelDificultad = campos[2];
+                String loginCreador = campos[3];
+
+                // Buscar al creador en la lista de profesores
+                Profesor creador = buscarProfesorPorNombre(loginCreador);
+
+                // Crear instancia de Learning Path
+                learningPath lp = new learningPath(titulo, descripcion, nivelDificultad, creador);
+
+                // Agregar el Learning Path a la lista
+                learningPaths.add(lp);
+            }
+        } catch (IOException e) {
+            System.out.println("Error al cargar los Learning Paths: " + e.getMessage());
+        }
+    }
+    
+    public Profesor buscarProfesorPorNombre(String login) {
+        for (Profesor profesor : profesores) {
+            if (profesor.getLogin().equals(login)) {
+                return profesor;
+            }
+        }
+        return null;  // Si no se encuentra el profesor, podrías lanzar una excepción o manejar el caso
+    }
+    
 
 }

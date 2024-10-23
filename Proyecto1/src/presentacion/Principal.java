@@ -19,6 +19,7 @@ public class Principal {
         
         
         sistema.cargarUsuariosCSV();
+        sistema.cargarLearningPathsDesdeCSV();
         //sistema.registrarUsuario("d.vergara112", "dani2004", "profesor");
         //sistema.registrarUsuario("mc.aponte2", "macalister14", "profesor");
         //sistema.registrarUsuario("s.vergara", "roli2006", "estudiante");
@@ -78,9 +79,9 @@ public class Principal {
         if (usuario != null) {
             System.out.println("Inicio de sesión exitoso. Bienvenido, " + usuario.getLogin() + " (" + usuario.getTipoUsuario() + ")");
             if (usuario instanceof Profesor) {
-                gestionarProfesor((Profesor) usuario, sistema, scanner);
+                menuProfesor((Profesor) usuario, sistema, scanner);
             } else if (usuario instanceof Estudiante) {
-                gestionarEstudiante((Estudiante) usuario, sistema, scanner);
+                menuEstudiante((Estudiante) usuario, sistema, scanner);
             }
         } else {
             System.out.println("Credenciales incorrectas. Inténtalo nuevamente.");
@@ -88,7 +89,7 @@ public class Principal {
     }
 	
 	// Método para gestionar opciones de profesor
-    private static void gestionarProfesor(Profesor profesor, Sistema sistema, Scanner scanner) {
+    private static void menuProfesor(Profesor profesor, Sistema sistema, Scanner scanner) {
         boolean salir = false;
 
         while (!salir) {
@@ -124,7 +125,7 @@ public class Principal {
     }
 
  // Método para gestionar opciones de estudiante
-    private static void gestionarEstudiante(Estudiante estudiante, Sistema sistema, Scanner scanner) {
+    private static void menuEstudiante(Estudiante estudiante, Sistema sistema, Scanner scanner) {
         boolean salir = false;
 
         while (!salir) {
