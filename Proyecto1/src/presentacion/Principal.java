@@ -99,7 +99,7 @@ public class Principal {
             System.out.println("3. Cerrar sesión");
             System.out.print("Selecciona una opción: ");
             int opcion = scanner.nextInt();
-            scanner.nextLine();  // Consumir nueva línea
+            scanner.nextLine();
 
             switch (opcion) {
                 case 1:
@@ -114,6 +114,12 @@ public class Principal {
                     break;
                 case 2:
                     verLearningPaths(sistema);
+                    System.out.println("Seleccione un Learning Path para ver actividades o crearlas: ");
+                    int opcionLp = scanner.nextInt();
+                    learningPath lp = sistema.obtenerLearningPaths().get(opcionLp-1);
+                    sistema.agregarActividad(profesor, lp);
+                    
+                    
                     break;
                 case 3:
                     salir = true;
@@ -151,13 +157,15 @@ public class Principal {
 
     private static void verLearningPaths(Sistema sistema) {
         System.out.println("=== Lista de Learning Paths ===");
-        int i=1;
+        int i=0;
+        
         for (learningPath lp : sistema.obtenerLearningPaths()) {
-            System.out.println(i+". "+ lp.getTitulo() + " (" + lp.getNivelDificultad() + ")");
+        	int num=i+1;
+            System.out.println(num+". "+ lp.getTitulo() + " (" + lp.getNivelDificultad() + ")");
             System.out.println("  Descripción: " + lp.getDescripcion());
             i++;
         }
-    
+
 }
 	
 	

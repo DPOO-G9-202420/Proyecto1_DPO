@@ -6,16 +6,17 @@ import persistencia.Archivo;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.io.BufferedReader;
-//import java.io.BufferedWriter;
+import java.io.BufferedWriter;
 import java.io.FileReader;
-//import java.io.FileWriter;
+import java.io.FileWriter;
 import java.util.List;
+import java.util.Scanner;
 
 
 public class Sistema {
 	private ArrayList<Usuario> usuarios;
     private ArrayList<learningPath> learningPaths;
-    private List<String> profesores;
+    private ArrayList<String> profesores;
     
     
 	public Sistema() {
@@ -81,15 +82,6 @@ public class Sistema {
     }
     	
     
-
-    private Usuario buscarUsuario(String login) {
-        for (Usuario u : usuarios) {
-            if (u.getLogin().equals(login)) {
-                return u;
-            }
-        }
-        return null;
-    }
     
  // Método para crear un Learning Path (solo para profesores)
     public void crearLearningPath(Profesor profesor, String titulo, String descripcion, String nivelDificultad) {
@@ -98,10 +90,6 @@ public class Sistema {
         Archivo.guardarLearningPathEnCSV(lp);
     }
     
-    // Método para obtener todos los Learning Paths
-    public List<learningPath> obtenerLearningPaths() {
-        return learningPaths;
-    }
     
     public void cargarLearningPathsDesdeCSV() {
         try (BufferedReader reader = new BufferedReader(new FileReader("lp.csv"))) {
@@ -130,37 +118,37 @@ public class Sistema {
         }
     }
     
-    public Usuario buscarProfesorPorNombre(String login) {
-        for (Usuario usuario : usuarios) {
-            if (usuario.getLogin().equals(login)) {
-                return usuario;
-            }
-        }
-        return null;  // Si no se encuentra el profesor, podrías lanzar una excepción o manejar el caso
-    }
     
-    public void agregarActividadALearningPath(Profesor profesor, String tituloLearningPath) {
-        learningPath learningPath = buscarLearningPathPorTitulo(tituloLearningPath);
+    public void agregarActividad(Profesor profesor, learningPath learningPath) {
 
-        if (learningPath != null && learningPath.getCreador().equals(profesor)) {
+        if (learningPath != null && learningPath.getProfesor().equals(profesor)) {
             Scanner scanner = new Scanner(System.in);
             System.out.println("¿Qué tipo de actividad deseas agregar? (1. Quiz, 2. Tarea, 3. Revisar Recurso)");
             int opcion = scanner.nextInt();
-            scanner.nextLine(); // Consumir la nueva línea
+            scanner.nextLine();
 
             switch (opcion) {
                 case 1: // Agregar Quiz
                     System.out.println("Ingrese el título del Quiz:");
-                    String tituloQuiz = scanner.nextLine();
+                    String nombreQuiz = scanner.nextLine();
                     System.out.println("Ingrese la descripción del Quiz:");
                     String descripcionQuiz = scanner.nextLine();
+                    System.out.println("Ingrese el objetivo del Quiz:");
+                    String objetivoQuiz = scanner.nextLine();
                     System.out.println("Ingrese el nivel de dificultad:");
                     String nivelDificultadQuiz = scanner.nextLine();
                     System.out.println("Ingrese la duración en minutos:");
                     int duracionQuiz = scanner.nextInt();
-                    scanner.nextLine(); // Consumir la nueva línea
+                    System.out.println("Ingrese la fecha limite :");
+                    String fechaLimiteQuiz = scanner.nextLine();
+                    System.out.println("Es opcional? (si/no) :");
+                    String esOpcionalQuiz = scanner.nextLine();
+                    System.out.println("Que actividad es un prerrequisito sugerido? :");
+                    String prerequisitoSugerido = scanner.nextLine();
+                    
+                    scanner.nextLine();
                     // Aquí agregamos más detalles del Quiz, como las preguntas, respuestas y calificación mínima...
-                    Quiz quiz = new Quiz(tituloQuiz, descripcionQuiz, nivelDificultadQuiz, duracionQuiz, /* otras propiedades */);
+                    Quiz quiz = new Quiz(nombreQuiz, descripcionQuiz, objetivoQuiz,nivelDificultadQuiz, duracionQuiz, fechaLimiteQuiz,esOpcionalQuiz,prerequisitoSugerido);
                     learningPath.agregarActividad(quiz);
                     System.out.println("Quiz agregado con éxito.");
                     break;
@@ -209,11 +197,32 @@ public class Sistema {
         }
     }
 
-    // Método auxiliar para buscar un Learning Path por título
+    // BUSCAR
     private learningPath buscarLearningPathPorTitulo(String titulo) {
         for (learningPath lp : learningPaths) {
             if (lp.getTitulo().equalsIgnoreCase(titulo)) {
                 return lp;
+            }
+        }
+        return null;
+    }
+  
+    public ArrayList<learningPath> obtenerLearningPaths() {
+        return learningPaths;
+    }
+    
+    private Usuario buscarUsuario(String login) {
+        for (Usuario u : usuarios) {
+            if (u.getLogin().equals(login)) {
+                return u;
+            }
+        }
+        return null;
+    }
+    public Usuario buscarProfesorPorNombre(String login) {
+        for (Usuario usuario : usuarios) {
+            if (usuario.getLogin().equals(login)) {
+                return usuario;
             }
         }
         return null;

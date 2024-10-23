@@ -15,7 +15,19 @@ public class Quiz extends Actividad{
 		
 	}
 
-	
+	@Override
+    public String iniciarActividad() {
+        // Implementación de la lógica para realizar el quiz
+        return "Realizando quiz: " + getNombre();
+    }
+
+    public int getCalificacionMinima() {
+        return calificacionMinima;
+    }
+
+    public ArrayList<String> getPreguntas() {
+        return preguntas;
+    }
 	
 
 	
