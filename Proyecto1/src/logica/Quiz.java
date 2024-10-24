@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Quiz extends Actividad{
-	private ArrayList<Pregunta> preguntas;
+	private ArrayList<String> opciones;
+	private int iOpcionCorrecta;
 	private float calificacionMinima;
 	
 	public Quiz(String nombre, String descripcion, String objetivo, String nivelDificultad, int duracion,
-			String fechaLimite, boolean esOpcional, Actividad prerequisitoSugerido) {
+			String fechaLimite, boolean esOpcional, Actividad prerequisitoSugerido, ArrayList<String> opciones, int iOpcionCorrecta) {
 		super(nombre, descripcion, objetivo, nivelDificultad, duracion, fechaLimite, esOpcional, prerequisitoSugerido);
-		this.preguntas=preguntas;
+		this.opciones=opciones;
+		this.iOpcionCorrecta=iOpcionCorrecta;
 		this.calificacionMinima=calificacionMinima;
 		
 	}
@@ -24,8 +26,8 @@ public class Quiz extends Actividad{
         return calificacionMinima;
     }
 
-    public ArrayList<Pregunta> getPreguntas() {
-        return preguntas;
+    public ArrayList<String> getPreguntas() {
+        return opciones;
     }
 	
 

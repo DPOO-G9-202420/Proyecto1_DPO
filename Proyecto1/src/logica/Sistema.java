@@ -126,6 +126,8 @@ public class Sistema {
     	SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
         formatoFecha.setLenient(false);
         boolean esOpcionalQuiz;
+        ArrayList<String> opciones=new ArrayList<String>();
+        
 
         if (learningPath != null && learningPath.getProfesor().equals(profesor)) {
             Scanner scanner = new Scanner(System.in);
@@ -135,30 +137,52 @@ public class Sistema {
 
             switch (opcion) {
                 case 1: // Agregar Quiz
-                    System.out.println("Ingrese el título del Quiz:");
+                	System.out.println("Ingrese el título del Quiz:");
                     String nombreQuiz = scanner.nextLine();
+
                     System.out.println("Ingrese la descripción del Quiz:");
                     String descripcionQuiz = scanner.nextLine();
+
                     System.out.println("Ingrese el objetivo del Quiz:");
                     String objetivoQuiz = scanner.nextLine();
+
                     System.out.println("Ingrese el nivel de dificultad:");
                     String nivelDificultadQuiz = scanner.nextLine();
+
                     System.out.println("Ingrese la duración en minutos:");
                     int duracionQuiz = scanner.nextInt();
-                    System.out.println("Ingrese la fecha limite (dd/mm/yyyy/):");
+                    scanner.nextLine(); 
+
+                    System.out.println("Ingrese la fecha límite (dd/mm/yyyy):");
                     String fechaString = scanner.nextLine();
-                    System.out.println("Es opcional? (si/no) :");
+
+                    System.out.println("¿Es opcional? (si/no):");
                     String esOpcionalQuizTxt = scanner.nextLine();
-                    if (esOpcionalQuizTxt=="si") {
-                    	esOpcionalQuiz=true;
+
+                    if (esOpcionalQuizTxt.equals("si")) {
+                        esOpcionalQuiz = true;
+                    } else {
+                        esOpcionalQuiz = false;
                     }
-                    else {esOpcionalQuiz=false;}
-                    
-                    //scanner.nextLine();
+
+                    System.out.println("¿Cuántas opciones tendrá el Quiz?");
+                    int numOpciones = scanner.nextInt();
+                    scanner.nextLine();
+
+                    for (int i = 1; i <= numOpciones; i++) {
+                        System.out.println("Escribe la opción " + i + ":");
+                        String opcionQuiz = scanner.nextLine();
+                        opciones.add(opcionQuiz);
+                    }
+
+                    System.out.println("¿Cuál es el índice de la opción correcta? (entero):");
+                    int iOpcionCorrecta = scanner.nextInt();
+             
                     Actividad prerequisitoSugerido=learningPath.getUltimaActividad();
-                    Quiz quiz = new Quiz(nombreQuiz, descripcionQuiz, objetivoQuiz,nivelDificultadQuiz, duracionQuiz, fechaString,esOpcionalQuiz,prerequisitoSugerido);
+                    Quiz quiz = new Quiz(nombreQuiz, descripcionQuiz, objetivoQuiz,nivelDificultadQuiz, duracionQuiz, fechaString,esOpcionalQuiz,prerequisitoSugerido,opciones,iOpcionCorrecta);
                     learningPath.agregarActividad(quiz);
                     System.out.println("Quiz agregado con éxito.");
+                    
                     break;
                 case 2: // Agregar Tarea
                     System.out.println("Ingrese el título de la Tarea:");
@@ -177,6 +201,7 @@ public class Sistema {
                     //Tarea tarea = new Tarea(tituloTarea, descripcionTarea, nivelDificultadTarea, duracionTarea, instruccionesTarea, medioEntrega);
                     //learningPath.agregarActividad(tarea);
                     System.out.println("Tarea agregada con éxito.");
+                    
                     break;
                 case 3: // Agregar Revisión de Recurso
                     System.out.println("Ingrese el título del recurso:");
@@ -195,6 +220,7 @@ public class Sistema {
                     //RevisarRecurso recurso = new RevisarRecurso(tituloRecurso, descripcionRecurso, nivelDificultadRecurso, duracionRecurso, tipoRecurso, enlaceRecurso);
                     //learningPath.agregarActividad(recurso);
                     System.out.println("Recurso agregado con éxito.");
+                    
                     break;
                 default:
                     System.out.println("Opción no válida.");
@@ -203,6 +229,7 @@ public class Sistema {
         } else {
             System.out.println("No tienes permisos para editar este Learning Path o no existe.");
         }
+        
     }
 
     // BUSCAR
