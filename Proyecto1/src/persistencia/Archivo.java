@@ -18,7 +18,7 @@ public class Archivo {
 		for(String texto : textos) {
 			bw.write(texto);
 			bw.write(",");
-			//ARREGLAR NO SIRVE
+
 
 		}
 		bw.close();
@@ -35,11 +35,9 @@ public class Archivo {
         }
     }
 	
-	// Método para guardar un Learning Path individualmente en un archivo CSV (sin actividades)
     public static void guardarLearningPathEnCSV(learningPath lp) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("lp.csv", true))) {
-            // Escribir los datos del Learning Path en el archivo CSV (sin las actividades)
-            writer.write(lp.getTitulo() + "," +
+                      writer.write(lp.getTitulo() + "," +
                          lp.getDescripcion() + "," +
                          lp.getNivelDificultad() + "," +
                          lp.getProfesor().getLogin() + "\n");

@@ -89,7 +89,6 @@ public class Principal {
         }
     }
 	
-	// Método para gestionar opciones de profesor
     private static void menuProfesor(Profesor profesor, Sistema sistema, Scanner scanner) {
         boolean salir = false;
 
@@ -131,7 +130,6 @@ public class Principal {
         }
     }
 
- // Método para gestionar opciones de estudiante
     private static void menuEstudiante(Estudiante estudiante, Sistema sistema, Scanner scanner) {
         boolean salir = false;
 

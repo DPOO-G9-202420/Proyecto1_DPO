@@ -75,7 +75,7 @@ public class Sistema {
                         System.out.println("Tipo de usuario no válido en el archivo CSV: " + tipoUsuario);
                         continue;
                     }
-                    usuarios.add(usuario);  // Agregar usuario a la lista en memoria
+                    usuarios.add(usuario);  
                 }
             }
         } catch (IOException e) {
@@ -83,9 +83,6 @@ public class Sistema {
         }
     }
     	
-    
-    
- // Método para crear un Learning Path (solo para profesores)
     public void crearLearningPath(Profesor profesor, String titulo, String descripcion, String nivelDificultad) {
         learningPath lp = new learningPath(titulo, descripcion, nivelDificultad, profesor);
         learningPaths.add(lp);
@@ -99,20 +96,12 @@ public class Sistema {
 
             while ((linea = reader.readLine()) != null) {
                 String[] campos = linea.split(",");
-
-                // Obtener datos del Learning Path
                 String titulo = campos[0];
                 String descripcion = campos[1];
                 String nivelDificultad = campos[2];
                 String loginCreador = campos[3];
-
-                // Buscar al creador en la lista de profesores
                 Profesor creador = (Profesor) buscarProfesorPorNombre(loginCreador);
-
-                // Crear instancia de Learning Path
                 learningPath lp = new learningPath(titulo, descripcion, nivelDificultad, creador);
-
-                // Agregar el Learning Path a la lista
                 learningPaths.add(lp);
             }
         } catch (IOException e) {
@@ -138,7 +127,7 @@ public class Sistema {
             scanner.nextLine();
 
             switch (opcion) {
-                case 1: // Agregar Quiz
+                case 1: 
                 	System.out.println("Ingrese el título del Quiz:");
                     String nombreQuiz = scanner.nextLine();
 
@@ -189,7 +178,7 @@ public class Sistema {
                     System.out.println("Quiz agregado con éxito.");
                     
                     break;
-                case 2: // Agregar Tarea
+                case 2: 
                     System.out.println("Ingrese el título de la Tarea:");
                     String tituloTarea = scanner.nextLine();
                     System.out.println("Ingrese la descripción de la Tarea:");
@@ -221,7 +210,7 @@ public class Sistema {
                     System.out.println("Tarea agregada con éxito.");
                     
                     break;
-                case 3: // Agregar Revisión de Recurso
+                case 3: 
                     System.out.println("Ingrese el título del recurso:");
                     String tituloRecurso = scanner.nextLine();
                     System.out.println("Ingrese la descripción del recurso:");
@@ -262,7 +251,6 @@ public class Sistema {
         
     }
 
-    // BUSCAR
     public learningPath buscarLearningPathPorTitulo(String titulo) {
         for (learningPath lp : learningPaths) {
             if (lp.getTitulo().equalsIgnoreCase(titulo)) {

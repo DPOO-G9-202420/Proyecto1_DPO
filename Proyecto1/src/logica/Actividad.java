@@ -81,15 +81,13 @@ public abstract class Actividad {
 		return duracion;
 	}
 	
-	// Método para verificar si el prerrequisito ha sido completado
     public boolean prerequisitoCompletado() {
         if (prerequisitoSugerido == null) {
-            return true; // No hay prerrequisito sugerido
+            return true; 
         }
         return prerequisitoSugerido.isEstado();
     }
 	
-	//Método para iniciar actividad
     public void iniciarActividad() {
     	if (!prerequisitoCompletado()) {
     		System.out.println("No has completado el prerequisito sugerido");
@@ -98,12 +96,11 @@ public abstract class Actividad {
     		
     	}
     }
- // Método para completar la actividad
     public void completarActividad() {
         this.estado = true;
         System.out.println("Actividad completada.");
     }
- // Método toString para mostrar la actividad
+
     @Override
     public String toString() {
         return String.format("Actividad:\nDescripción\nObjetivo:\nDificultad:\n" +

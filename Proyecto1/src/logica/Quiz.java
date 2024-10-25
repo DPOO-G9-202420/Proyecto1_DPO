@@ -21,7 +21,6 @@ public class Quiz extends Actividad{
 
 	@Override
     public void iniciarActividad() {
-        // Implementación de la lógica para realizar el quiz
     }
 
     public float getCalificacionMinima() {
