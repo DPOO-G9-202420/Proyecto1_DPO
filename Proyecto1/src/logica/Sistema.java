@@ -126,6 +126,8 @@ public class Sistema {
     	SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
         formatoFecha.setLenient(false);
         boolean esOpcionalQuiz;
+        boolean esOpcionalTarea;
+        boolean esOpcionalRecurso;
         ArrayList<String> opciones=new ArrayList<String>();
         
 
@@ -164,6 +166,9 @@ public class Sistema {
                     } else {
                         esOpcionalQuiz = false;
                     }
+                    
+                    System.out.println("Ingrese la pregunta: ");
+                    String preguntaQuiz = scanner.nextLine();
 
                     System.out.println("¿Cuántas opciones tendrá el Quiz?");
                     int numOpciones = scanner.nextInt();
@@ -179,7 +184,7 @@ public class Sistema {
                     int iOpcionCorrecta = scanner.nextInt();
              
                     Actividad prerequisitoSugerido=learningPath.getUltimaActividad();
-                    Quiz quiz = new Quiz(nombreQuiz, descripcionQuiz, objetivoQuiz,nivelDificultadQuiz, duracionQuiz, fechaString,esOpcionalQuiz,prerequisitoSugerido,opciones,iOpcionCorrecta);
+                    Quiz quiz = new Quiz(nombreQuiz, descripcionQuiz, objetivoQuiz,nivelDificultadQuiz, duracionQuiz, fechaString,esOpcionalQuiz,prerequisitoSugerido,preguntaQuiz,opciones,iOpcionCorrecta);
                     learningPath.agregarActividad(quiz);
                     System.out.println("Quiz agregado con éxito.");
                     
@@ -189,17 +194,30 @@ public class Sistema {
                     String tituloTarea = scanner.nextLine();
                     System.out.println("Ingrese la descripción de la Tarea:");
                     String descripcionTarea = scanner.nextLine();
+                    System.out.println("Ingrese el objetivo del Quiz:");
+                    String objetivoTarea = scanner.nextLine();
                     System.out.println("Ingrese el nivel de dificultad:");
                     String nivelDificultadTarea = scanner.nextLine();
                     System.out.println("Ingrese la duración en minutos:");
                     int duracionTarea = scanner.nextInt();
-                    scanner.nextLine(); // Consumir la nueva línea
+                    scanner.nextLine(); 
+                    System.out.println("Ingrese la fecha límite (dd/mm/yyyy):");
+                    String fechaLimiteTarea = scanner.nextLine();
+                    System.out.println("¿Es opcional? (si/no):");
+                    String esOpcionalTareaTxt = scanner.nextLine();
+
+                    if (esOpcionalTareaTxt.equals("si")) {
+                        esOpcionalTarea = true;
+                    } else {
+                        esOpcionalTarea = false;
+                    }
                     System.out.println("Ingrese las instrucciones de la Tarea:");
                     String instruccionesTarea = scanner.nextLine();
-                    System.out.println("Ingrese el medio de entrega:");
-                    String medioEntrega = scanner.nextLine();
-                    //Tarea tarea = new Tarea(tituloTarea, descripcionTarea, nivelDificultadTarea, duracionTarea, instruccionesTarea, medioEntrega);
-                    //learningPath.agregarActividad(tarea);
+                    System.out.println("Ingrese el metodo de entrega:");
+                    String metodoEntrega = scanner.nextLine();
+                    Actividad prerequisitoSugeridoTarea=learningPath.getUltimaActividad();
+                    Tarea tarea = new Tarea(tituloTarea, descripcionTarea, objetivoTarea, nivelDificultadTarea, duracionTarea, fechaLimiteTarea, esOpcionalTarea, instruccionesTarea, metodoEntrega,prerequisitoSugeridoTarea);
+                    learningPath.agregarActividad(tarea);
                     System.out.println("Tarea agregada con éxito.");
                     
                     break;
@@ -208,17 +226,29 @@ public class Sistema {
                     String tituloRecurso = scanner.nextLine();
                     System.out.println("Ingrese la descripción del recurso:");
                     String descripcionRecurso = scanner.nextLine();
+                    System.out.println("Ingrese el objetivo de la revisión:");
+                    String objetivoRecurso = scanner.nextLine();
                     System.out.println("Ingrese el nivel de dificultad:");
                     String nivelDificultadRecurso = scanner.nextLine();
                     System.out.println("Ingrese la duración en minutos:");
                     int duracionRecurso = scanner.nextInt();
-                    scanner.nextLine(); // Consumir la nueva línea
+                    scanner.nextLine();
+                    System.out.println("Ingrese la fecha límite (dd/mm/yyyy):");
+                    String fechaRecurso = scanner.nextLine();
+                    System.out.println("¿Es opcional? (si/no):");
+                    String esOpcionalRecursoTxt = scanner.nextLine();
+                    if (esOpcionalRecursoTxt.equals("si")) {
+                        esOpcionalRecurso = true;
+                    } else {
+                        esOpcionalRecurso = false;
+                    }
                     System.out.println("Ingrese el tipo de recurso (video, libro, pdf, etc.):");
                     String tipoRecurso = scanner.nextLine();
                     System.out.println("Ingrese el enlace al recurso:");
                     String enlaceRecurso = scanner.nextLine();
-                    //RevisarRecurso recurso = new RevisarRecurso(tituloRecurso, descripcionRecurso, nivelDificultadRecurso, duracionRecurso, tipoRecurso, enlaceRecurso);
-                    //learningPath.agregarActividad(recurso);
+                    Actividad prerequisitoSugeridoRecurso=learningPath.getUltimaActividad();
+                    RevisarRecurso recurso = new RevisarRecurso(tituloRecurso, descripcionRecurso, objetivoRecurso, nivelDificultadRecurso, duracionRecurso, fechaRecurso, esOpcionalRecurso, tipoRecurso, enlaceRecurso, prerequisitoSugeridoRecurso);
+                    learningPath.agregarActividad(recurso);
                     System.out.println("Recurso agregado con éxito.");
                     
                     break;

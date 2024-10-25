@@ -115,7 +115,7 @@ public class Principal {
                     break;
                 case 2:
                     verLearningPaths(sistema);
-                    System.out.println("Seleccione un Learning Path para ver actividades o crearlas: ");
+                    System.out.println("\nSeleccione un Learning Path para ver actividades o crearlas: ");
                     int opcionLp = scanner.nextInt();
                     learningPath lp = sistema.obtenerLearningPaths().get(opcionLp-1);
                     sistema.agregarActividad(profesor, lp);
