@@ -15,6 +15,19 @@ public class RevisarRecurso extends Actividad{
 		
 	}
 	
+	@Override
+    public String getTipo() {
+        return "RevisarRecurso";
+    }
+	
+	public String getTipoRecurso() {
+		return tipoRecurso;
+	}
+	
+	public String getEnlace(){
+		return enlaceRecurso;
+	}
+	
 	
 
 }

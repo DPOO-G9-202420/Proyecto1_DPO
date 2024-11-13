@@ -114,6 +114,7 @@ public class Sistema {
     	
     	SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
         formatoFecha.setLenient(false);
+        String lpStr = learningPath.getTitulo();
         boolean esOpcionalQuiz;
         boolean esOpcionalTarea;
         boolean esOpcionalRecurso;
@@ -175,6 +176,7 @@ public class Sistema {
                     Actividad prerequisitoSugerido=learningPath.getUltimaActividad();
                     Quiz quiz = new Quiz(nombreQuiz, descripcionQuiz, objetivoQuiz,nivelDificultadQuiz, duracionQuiz, fechaString,esOpcionalQuiz,prerequisitoSugerido,preguntaQuiz,opciones,iOpcionCorrecta);
                     learningPath.agregarActividad(quiz);
+                    guardarActividadEnCSV(quiz,lpStr);
                     System.out.println("Quiz agregado con éxito.");
                     
                     break;
@@ -207,6 +209,7 @@ public class Sistema {
                     Actividad prerequisitoSugeridoTarea=learningPath.getUltimaActividad();
                     Tarea tarea = new Tarea(tituloTarea, descripcionTarea, objetivoTarea, nivelDificultadTarea, duracionTarea, fechaLimiteTarea, esOpcionalTarea, instruccionesTarea, metodoEntrega,prerequisitoSugeridoTarea);
                     learningPath.agregarActividad(tarea);
+                    guardarActividadEnCSV(tarea,lpStr);
                     System.out.println("Tarea agregada con éxito.");
                     
                     break;
@@ -238,6 +241,7 @@ public class Sistema {
                     Actividad prerequisitoSugeridoRecurso=learningPath.getUltimaActividad();
                     RevisarRecurso recurso = new RevisarRecurso(tituloRecurso, descripcionRecurso, objetivoRecurso, nivelDificultadRecurso, duracionRecurso, fechaRecurso, esOpcionalRecurso, tipoRecurso, enlaceRecurso, prerequisitoSugeridoRecurso);
                     learningPath.agregarActividad(recurso);
+                    guardarActividadEnCSV(recurso,lpStr);
                     System.out.println("Recurso agregado con éxito.");
                     
                     break;
@@ -250,6 +254,48 @@ public class Sistema {
         }
         
     }
+    
+    public void guardarActividadEnCSV(Actividad actividad, String tituloLearningPath) {
+        String archivoActividades = "actividades.csv"; // Ruta del archivo CSV de actividades
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivoActividades, true))) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(tituloLearningPath).append(",");
+            sb.append(actividad.getClass().getSimpleName()).append(",");
+            sb.append(actividad.getNombre()).append(",");
+            sb.append(actividad.getDescripcion()).append(",");
+            sb.append(actividad.getObjetivo()).append(",");
+            sb.append(actividad.getNivelDificultad()).append(",");
+            sb.append(actividad.getDuracion()).append(",");
+            sb.append(actividad.getFechaLimite()).append(",");
+            sb.append(actividad.isEsOpcional());
+
+
+            if (actividad instanceof Quiz) {
+                Quiz quiz = (Quiz) actividad;
+                sb.append(",").append(quiz.getPregunta());
+                sb.append(",").append(quiz.getPreguntas());
+                sb.append(",").append(quiz.getIOpcionCorrecta());
+                
+            } else if (actividad instanceof Tarea) {
+                Tarea tarea = (Tarea) actividad;
+                sb.append(",").append(tarea.getInstrucciones());
+                sb.append(",").append(tarea.getMetodo());
+
+            } else if (actividad instanceof RevisarRecurso) {
+                RevisarRecurso recurso = (RevisarRecurso) actividad;
+                sb.append(",").append(recurso.getTipoRecurso());
+                sb.append(",").append(recurso.getEnlace());
+            }
+
+            bw.write(sb.toString());
+            bw.newLine();
+        } catch (IOException e) {
+            System.out.println("Error al guardar la actividad en el archivo CSV.");
+            e.printStackTrace();
+        }
+    }
+
 
     public learningPath buscarLearningPathPorTitulo(String titulo) {
         for (learningPath lp : learningPaths) {

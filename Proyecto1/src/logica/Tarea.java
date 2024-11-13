@@ -19,6 +19,19 @@ public class Tarea extends Actividad{
 		this.instruccionesTarea=instruccionesTarea;
 		
 	}
+	
+	public String getInstrucciones() {
+		return instruccionesTarea;
+	}
+	
+	public String getMetodo() {
+		return metodoEntrega;
+	}
+	
+	@Override
+    public String getTipo() {
+        return "Tarea";
+    }
 
 
 	

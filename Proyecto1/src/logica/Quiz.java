@@ -30,6 +30,24 @@ public class Quiz extends Actividad{
     public ArrayList<String> getPreguntas() {
         return opciones;
     }
+    
+    public int getCantidadPreguntas() {
+        return opciones.size();
+    }
+    
+    public String getPregunta() {
+    	return preguntaQuiz;
+    }
+    
+    public int getIOpcionCorrecta() {
+    	return iOpcionCorrecta;
+    }
+    
+    
+    @Override
+    public String getTipo() {
+        return "Quiz";
+    }
 	
 
 	

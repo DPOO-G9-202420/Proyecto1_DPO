@@ -35,6 +35,8 @@ public abstract class Actividad {
 	public String getDescripcion() {
 		return descripcion;
 	}
+	public abstract String getTipo(); // Método abstracto para obtener el tipo de actividad
+	
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}

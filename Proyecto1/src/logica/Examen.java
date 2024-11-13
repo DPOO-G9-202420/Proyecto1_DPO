@@ -8,6 +8,9 @@ public class Examen extends Actividad{
 
 	}
 	
-	
+	@Override
+    public String getTipo() {
+        return "Examen";
+    }
 
 }
