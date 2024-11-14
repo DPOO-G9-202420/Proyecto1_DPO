@@ -21,6 +21,7 @@ public class Principal {
         
         sistema.cargarUsuariosCSV();
         sistema.cargarLearningPathsDesdeCSV();
+        sistema.cargarActividadesDesdeCSV();
         //sistema.registrarUsuario("d.vergara112", "dani2004", "profesor");
         //sistema.registrarUsuario("mc.aponte2", "macalister14", "profesor");
         //sistema.registrarUsuario("s.vergara", "roli2006", "estudiante");

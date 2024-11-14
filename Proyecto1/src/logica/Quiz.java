@@ -7,15 +7,15 @@ public class Quiz extends Actividad{
 	private ArrayList<String> opciones;
 	private String preguntaQuiz;
 	private int iOpcionCorrecta;
-	private float calificacionMinima;
+	private int numOpciones;
 	
 	public Quiz(String nombre, String descripcion, String objetivo, String nivelDificultad, int duracion,
-			String fechaLimite, boolean esOpcional, Actividad prerequisitoSugerido, String preguntaQuiz, ArrayList<String> opciones, int iOpcionCorrecta) {
+			String fechaLimite, boolean esOpcional, Actividad prerequisitoSugerido, String preguntaQuiz, int numOpciones, ArrayList<String> opciones, int iOpcionCorrecta) {
 		super(nombre, descripcion, objetivo, nivelDificultad, duracion, fechaLimite, esOpcional, prerequisitoSugerido);
 		this.opciones=opciones;
 		this.iOpcionCorrecta=iOpcionCorrecta;
 		this.preguntaQuiz=preguntaQuiz;
-		this.calificacionMinima=calificacionMinima;
+		this.numOpciones=numOpciones;
 		
 	}
 
@@ -23,8 +23,8 @@ public class Quiz extends Actividad{
     public void iniciarActividad() {
     }
 
-    public float getCalificacionMinima() {
-        return calificacionMinima;
+    public float getNumOpciones() {
+        return numOpciones;
     }
 
     public ArrayList<String> getPreguntas() {

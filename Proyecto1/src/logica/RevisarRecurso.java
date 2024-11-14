@@ -7,7 +7,7 @@ public class RevisarRecurso extends Actividad{
     private String enlaceRecurso;
 
 	public RevisarRecurso(String nombre, String descripcion, String objetivo, String nivelDificultad, int duracion,
-			String fechaLimite, boolean esOpcional, String tipoRecurso, String enlaceRecurso, Actividad prerequisitoSugerido) {
+			String fechaLimite, boolean esOpcional,Actividad prerequisitoSugerido, String tipoRecurso, String enlaceRecurso) {
 		super(nombre, descripcion, objetivo, nivelDificultad, duracion, fechaLimite, esOpcional, prerequisitoSugerido);
 		this.tipoRecurso=tipoRecurso;
 		this.enlaceRecurso=enlaceRecurso;

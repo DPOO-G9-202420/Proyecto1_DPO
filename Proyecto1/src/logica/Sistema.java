@@ -174,7 +174,7 @@ public class Sistema {
                     int iOpcionCorrecta = scanner.nextInt();
              
                     Actividad prerequisitoSugerido=learningPath.getUltimaActividad();
-                    Quiz quiz = new Quiz(nombreQuiz, descripcionQuiz, objetivoQuiz,nivelDificultadQuiz, duracionQuiz, fechaString,esOpcionalQuiz,prerequisitoSugerido,preguntaQuiz,opciones,iOpcionCorrecta);
+                    Quiz quiz = new Quiz(nombreQuiz, descripcionQuiz, objetivoQuiz,nivelDificultadQuiz, duracionQuiz, fechaString,esOpcionalQuiz,prerequisitoSugerido,preguntaQuiz,numOpciones,opciones,iOpcionCorrecta);
                     learningPath.agregarActividad(quiz);
                     guardarActividadEnCSV(quiz,lpStr);
                     System.out.println("Quiz agregado con éxito.");
@@ -207,7 +207,7 @@ public class Sistema {
                     System.out.println("Ingrese el metodo de entrega:");
                     String metodoEntrega = scanner.nextLine();
                     Actividad prerequisitoSugeridoTarea=learningPath.getUltimaActividad();
-                    Tarea tarea = new Tarea(tituloTarea, descripcionTarea, objetivoTarea, nivelDificultadTarea, duracionTarea, fechaLimiteTarea, esOpcionalTarea, instruccionesTarea, metodoEntrega,prerequisitoSugeridoTarea);
+                    Tarea tarea = new Tarea(tituloTarea, descripcionTarea, objetivoTarea, nivelDificultadTarea, duracionTarea, fechaLimiteTarea, esOpcionalTarea, prerequisitoSugeridoTarea,instruccionesTarea, metodoEntrega);
                     learningPath.agregarActividad(tarea);
                     guardarActividadEnCSV(tarea,lpStr);
                     System.out.println("Tarea agregada con éxito.");
@@ -239,7 +239,7 @@ public class Sistema {
                     System.out.println("Ingrese el enlace al recurso:");
                     String enlaceRecurso = scanner.nextLine();
                     Actividad prerequisitoSugeridoRecurso=learningPath.getUltimaActividad();
-                    RevisarRecurso recurso = new RevisarRecurso(tituloRecurso, descripcionRecurso, objetivoRecurso, nivelDificultadRecurso, duracionRecurso, fechaRecurso, esOpcionalRecurso, tipoRecurso, enlaceRecurso, prerequisitoSugeridoRecurso);
+                    RevisarRecurso recurso = new RevisarRecurso(tituloRecurso, descripcionRecurso, objetivoRecurso, nivelDificultadRecurso, duracionRecurso, fechaRecurso, esOpcionalRecurso,prerequisitoSugeridoRecurso, tipoRecurso, enlaceRecurso);
                     learningPath.agregarActividad(recurso);
                     guardarActividadEnCSV(recurso,lpStr);
                     System.out.println("Recurso agregado con éxito.");
@@ -274,8 +274,12 @@ public class Sistema {
             if (actividad instanceof Quiz) {
                 Quiz quiz = (Quiz) actividad;
                 sb.append(",").append(quiz.getPregunta());
-                sb.append(",").append(quiz.getPreguntas());
+                sb.append(",").append(quiz.getNumOpciones());
                 sb.append(",").append(quiz.getIOpcionCorrecta());
+                for (String op : quiz.getPreguntas()) {
+                	sb.append(",").append(op);
+                }
+                
                 
             } else if (actividad instanceof Tarea) {
                 Tarea tarea = (Tarea) actividad;
@@ -292,6 +296,56 @@ public class Sistema {
             bw.newLine();
         } catch (IOException e) {
             System.out.println("Error al guardar la actividad en el archivo CSV.");
+            e.printStackTrace();
+        }
+    }
+    
+    public void cargarActividadesDesdeCSV() {
+        String archivoActividades = "actividades.csv"; // Ruta del archivo CSV de actividades
+        ArrayList<String> opciones = new ArrayList<String>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(archivoActividades))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] datos = linea.split(",");
+                String tituloLearningPath = datos[0];
+                String tipoActividad = datos[1];
+                String tituloActividad = datos[2];
+                String descripcion = datos[3];
+                String objetivo = datos[4];
+                String nivelDificultad = datos[5];
+                int duracion = Integer.parseInt(datos[6]);
+                String fechaLimite = datos[7];
+                boolean esOpcional = Boolean.parseBoolean(datos[8]);
+                
+
+                learningPath learningPath = buscarLearningPathPorTitulo(tituloLearningPath);
+
+                if (learningPath != null) {
+                    if (tipoActividad.equals("Quiz")) {
+                    	String pregunta = datos[9];
+                    	int numOpciones = Integer.parseInt(datos[10]);
+                    	int iOpcionCorrecta = Integer.parseInt(datos[11]);
+                    	for (int i = 1; i <= numOpciones; i++) {
+                    		opciones.add(datos[i+11]);
+                    	}
+                        Quiz quiz = new Quiz(tituloActividad, descripcion, objetivo, nivelDificultad, duracion, fechaLimite,esOpcional, null, pregunta, numOpciones, opciones, iOpcionCorrecta);
+                        learningPath.agregarActividad(quiz);
+                    } else if (tipoActividad.equals("Tarea")) {
+                        String instrucciones = datos[9];
+                        String metodo = datos[10];
+                        Tarea tarea = new Tarea(tituloActividad, descripcion, objetivo, nivelDificultad, duracion, fechaLimite,esOpcional, null,instrucciones, metodo);
+                        learningPath.agregarActividad(tarea);
+                    } else if (tipoActividad.equals("RevisarRecurso")) {
+                        String tipo = datos[9];
+                        String enlace = datos[10];
+                        RevisarRecurso revisarRecurso = new RevisarRecurso(tituloActividad, descripcion, objetivo, nivelDificultad, duracion, fechaLimite,esOpcional, null, tipo, enlace);
+                        learningPath.agregarActividad(revisarRecurso);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error al leer las actividades desde el archivo CSV.");
             e.printStackTrace();
         }
     }
