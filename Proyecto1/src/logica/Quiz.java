@@ -23,7 +23,7 @@ public class Quiz extends Actividad{
     public void iniciarActividad() {
     }
 
-    public float getNumOpciones() {
+    public int getNumOpciones() {
         return numOpciones;
     }
 
