@@ -1,5 +1,6 @@
 package test;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -13,31 +14,21 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import logica.Sistema;
 import logica.Estudiante;
-import logica.Usuario;
-import logica.Profesor;
 
-public class SistemaTest {
-	private Sistema sistema;
-	private Usuario usuario;
-	private Estudiante estudiante;
-	private Profesor profesor;
+public class EstudianteTest {
+	private Estudiante estudiante1;
+	
 	
 	@BeforeEach
-	public void SetUp() {
-		this.sistema=new Sistema();
-		estudiante= new Estudiante("mc.aponte", "1234");
-		profesor=new Profesor ("d.vergara112", "dani2004");
+	void setUp() {
+		estudiante1= new Estudiante("mc.aponte","macalister14");
 	}
 	
 	@Test
-	public void cargarUsuariosCSVTest() {
-		File archivoUsuarios= new File("usuarios.csv");
-		try {
-			sistema.cargarUsuariosCSV(archivoUsuarios);
-		}
+	void testGetTipoUsuario() {
+		assertEquals("estudiante", estudiante1.getTipoUsuario());
 	}
-	
-	
+
 }
+
