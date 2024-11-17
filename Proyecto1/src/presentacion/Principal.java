@@ -3,9 +3,11 @@ package presentacion;
 import logica.Sistema;
 import logica.Usuario;
 import logica.Profesor;
+import logica.Actividad;
 import logica.Estudiante;
 import logica.learningPath;
 
+import java.awt.desktop.SystemEventListener;
 import java.io.IOException;
 import java.text.ParseException;
 //import java.util.ArrayList;
@@ -22,10 +24,7 @@ public class Principal {
         sistema.cargarUsuariosCSV();
         sistema.cargarLearningPathsDesdeCSV();
         sistema.cargarActividadesDesdeCSV();
-        //sistema.registrarUsuario("d.vergara112", "dani2004", "profesor");
-        //sistema.registrarUsuario("mc.aponte2", "macalister14", "profesor");
-        //sistema.registrarUsuario("s.vergara", "roli2006", "estudiante");
-        //sistema.registrarUsuario("l.moure", "luciamoure", "estudiante");
+        
         
         while (!salir) {
             System.out.println("---Learning Path Recommendation System---");
@@ -115,11 +114,18 @@ public class Principal {
                     break;
                 case 2:
                     verLearningPaths(sistema);
-                    System.out.println("\nSeleccione un Learning Path para ver actividades o crearlas: ");
+                    System.out.println("\nSeleccione un Learning Path para ver o crear actividades: ");
                     int opcionLp = scanner.nextInt();
                     learningPath lp = sistema.obtenerLearningPaths().get(opcionLp-1);
-                    sistema.agregarActividad(profesor, lp);
-                    
+                    System.out.println("\nEscriba 1 para ver las actividades o 2 para agregar una: ");
+                    int op = scanner.nextInt();
+                    if (op==1) {
+                    	mostrarActividadesDeLearningPath(lp);
+                    }
+                    else if(op==2) {
+                    	sistema.agregarActividad(profesor, lp);
+                    }
+                    else {mostrarActividadesDeLearningPath(lp);}
                     
                     break;
                 case 3:
@@ -145,6 +151,10 @@ public class Principal {
             switch (opcion) {
                 case 1:
                     verLearningPaths(sistema);
+                    System.out.println("\nSeleccione un Learning Path para ver actividades: ");
+                    int opcionLp = scanner.nextInt();
+                    learningPath lp = sistema.obtenerLearningPaths().get(opcionLp-1);
+                    mostrarActividadesDeLearningPath(lp);
                     break;
                 case 2:
                     salir = true;
@@ -165,10 +175,27 @@ public class Principal {
             System.out.println("  Descripción: " + lp.getDescripcion());
             i++;
         }
+        
+        
 
 }
 	
-	
+    private static void mostrarActividadesDeLearningPath(learningPath learningPath) {
+        System.out.println("\nActividades en el Learning Path: " + learningPath.getTitulo());
+
+        if (learningPath.getActividades().isEmpty()) {
+            System.out.println("Este Learning Path no tiene actividades.");
+            return;
+        }
+
+        for (int i = 0; i < learningPath.getActividades().size(); i++) {
+            Actividad actividad = learningPath.getActividades().get(i);
+            System.out.println((i + 1) + ". " + actividad.getNombre() + " - " + actividad.getDescripcion() +
+                    " (" + actividad.getTipo() + ")");
+            
+        }
+        System.out.println("");
+    }
 
         
         
