@@ -1,6 +1,5 @@
 package test;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -14,30 +13,30 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import logica.Estudiante;
+import logica.Profesor;
 
-public class EstudianteTest {
-	private Estudiante estudiante1;
-	
+
+public class ProfesorTest {
+	private Profesor profesor1;
 	
 	@BeforeEach
 	void setUp() {
-		estudiante1= new Estudiante("s.vergara","roli2006");
+		profesor1= new Profesor("d.vergara112", "dani2004");
 	}
 	
 	@Test
 	void testGetTipoUsuario() {
-		assertEquals("estudiante", estudiante1.getTipoUsuario());
+		assertEquals("profesor", profesor1.getTipoUsuario());
 	}
 	
-	@Test 
+	@Test
 	void testGetLogin() {
-		assertEquals("s.vergara",estudiante1.getLogin());
+		assertEquals("d.vergara112", profesor1.getLogin());
 	}
-
+	
 	@Test
 	void testGetContraseña() {
-		assertEquals("roli2006", estudiante1.getContrasena());
+		assertEquals("dani2004", profesor1.getContrasena());
 	}
+	
 }
-
