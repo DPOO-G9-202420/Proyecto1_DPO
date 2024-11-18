@@ -14,32 +14,30 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import logica.Quiz;
+import logica.Tarea;
 import logica.Actividad;
 
-public class QuizTest {
-	private Quiz quiz1;
+
+public class TareaTest {
+	private Tarea tarea1;
 	
 	@BeforeEach
-	void setUp() {
-		quiz1= new Quiz("quiz 1", "suma y resta de polinomios", "evaluar parcialmente los temas vistos en clase", "facil", 25, "2024-12-12", false, null, "1+1", 4, new ArrayList<>(List.of("0", "1", "2","3")), 1);
-	}
-	
-	@Test 
-	void testGetNumOpciones() {
-		assertEquals(4, quiz1.getNumOpciones());
-	}
-	
-
-	@Test
-	void testGetCantidadPreguntas() {
-		assertEquals(4, quiz1.getPreguntas().size());
+	void Setup() {
+		tarea1= new Tarea("lectura 1", "primeras 10 páginas del libro", "aprender sobre la programación 1.0", "facil", 20, "2024-11-11", true, null, "leer las primeras 10 paginas", "bloque neon");
 	}
 	
 	@Test
-	void testGetTipo() {
-		assertEquals("Quiz", quiz1.getTipo());
+	void testGetInstrucciones() {
+		assertEquals("leer las primeras 10 paginas", tarea1.getInstrucciones());
 	}
 	
+	@Test
+	void testGetMetodo() {
+		assertEquals("bloque neon", tarea1.getMetodo());
+	}
 	
+	@Test
+	void testgetTipo() {
+		assertEquals("Tarea", tarea1.getTipo());
+	}
 }
