@@ -9,6 +9,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class PLogin extends JPanel {
+	private PEstudiante pantallaEstudiante;
+	private PProfesor pantallaProfesor;
+	
     public PLogin(Sistema sistema, JFrame ventanaPrincipal) {
         setLayout(new GridLayout(4, 1));
 
@@ -30,9 +33,9 @@ public class PLogin extends JPanel {
                 JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos.");
             } else {
                 if (user instanceof Estudiante) {
-                    ventanaPrincipal.setContentPane(new PantallaEstudiante((Estudiante) user, sistema, ventanaPrincipal));
+                    ventanaPrincipal.setContentPane(new PEstudiante((Estudiante) user, sistema, ventanaPrincipal));
                 } else if (user instanceof Profesor) {
-                    ventanaPrincipal.setContentPane(new PantallaProfesor((Profesor) user, sistema, ventanaPrincipal));
+                    ventanaPrincipal.setContentPane(new PProfesor((Profesor) user, sistema, ventanaPrincipal));
                 }
                 ventanaPrincipal.revalidate();
                 ventanaPrincipal.repaint();
