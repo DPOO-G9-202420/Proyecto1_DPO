@@ -11,7 +11,7 @@ public class PVerLearningPath extends JPanel{
 	private PProfesor pantallaProfesor;
 	private Sistema sistema;
 	
-	public PVerLearningPath(Sistema sistema, JFrame ventanaPrincipal) {
+	public PVerLearningPath(Sistema sistema, JFrame ventanaPrincipal, Profesor profesor) {
 		this.sistema=sistema;
 		setLayout(new BorderLayout());
 		
@@ -22,10 +22,19 @@ public class PVerLearningPath extends JPanel{
 		java.util.List<learningPath> learningPaths= sistema.obtenerLearningPaths();
 		JTextArea textArea= new JTextArea();
 		textArea.setEditable(false);
+		learningPaths.toString();
 		for (learningPath learningPath: learningPaths) {
 			textArea.append(learningPath.toString()+"\n\n");
 		}
 		add(new JScrollPane(textArea), BorderLayout.CENTER);
+		
+		JButton btnVolver=new JButton ("Volver");
+		btnVolver.addActionListener(e->{
+			ventanaPrincipal.setContentPane(new PProfesor(profesor, sistema, ventanaPrincipal));
+			ventanaPrincipal.revalidate();
+			ventanaPrincipal.repaint();
+		});
+		add(btnVolver, BorderLayout.SOUTH);
 	}
-
+	
 }

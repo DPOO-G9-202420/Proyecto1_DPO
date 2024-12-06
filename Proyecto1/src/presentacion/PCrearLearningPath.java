@@ -38,20 +38,24 @@ public class PCrearLearningPath extends JPanel {
 		panelEspacios.add(txtDescripcion);
 	
 		
-		JLabel lblNivel= new JLabel("Nivel de dificultad");
+		JLabel lblNivel= new JLabel("Nivel de dificultad (de 1 a 5)");
 		JTextField txtNivel= new JTextField(10);
 		panelEspacios.add(lblNivel);
 		panelEspacios.add(txtNivel);
 	
 		add(panelEspacios, BorderLayout.CENTER);
 		
-		JButton btnAceptar= new JButton("aceptar");
-		btnAceptar.addActionListener(e->{
+		JButton btnCrear= new JButton("Crear");
+		btnCrear.addActionListener(e->{
 			String Titulo =txtTitulo.getText();
 			String Descripcion=txtDescripcion.getText();
 			String Nivel=txtNivel.getText();
+			sistema.crearLearningPath(profesor, Titulo, Descripcion, Nivel);
+			ventanaPrincipal.setContentPane(new PCrearLearningPath(sistema, ventanaPrincipal, profesor));
+			ventanaPrincipal.revalidate();
+			ventanaPrincipal.repaint();
 		});
-		JButton btnVolver=new JButton("volver");
+		JButton btnVolver=new JButton("Volver");
 		btnVolver.addActionListener(e->{
 			ventanaPrincipal.setContentPane(new PProfesor(profesor, sistema, ventanaPrincipal));
 			ventanaPrincipal.revalidate();
@@ -60,7 +64,7 @@ public class PCrearLearningPath extends JPanel {
 		
 		JPanel panelBotones = new JPanel();
 		panelBotones.setLayout(new FlowLayout());
-		panelBotones.add(btnAceptar);
+		panelBotones.add(btnCrear);
 		panelBotones.add(btnVolver);
 		
 		add(panelBotones, BorderLayout.SOUTH);

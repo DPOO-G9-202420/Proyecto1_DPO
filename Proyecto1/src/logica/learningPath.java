@@ -123,6 +123,12 @@ public class learningPath {
 		 }
 		 else {return null;}
 	 }
-	         
+	 
+	 public String toString() {
+		return "Titulo:  " + titulo + "\n" + 
+				"Descripción:  " + descripcion + "\n" + 
+				"Nivel de dificultad:  " + nivelDificultad + "\n";
+		 
+	 }
 
 }

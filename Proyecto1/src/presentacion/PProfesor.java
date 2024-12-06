@@ -56,7 +56,7 @@ public class PProfesor extends JPanel {
 	
 		JButton botonVerLearningPaths=new JButton("Ver Learning Paths");
 		botonVerLearningPaths.addActionListener(e ->{
-			ventanaPrincipal.setContentPane(new PVerLearningPath(sistema, ventanaPrincipal));
+			ventanaPrincipal.setContentPane(new PVerLearningPath(sistema, ventanaPrincipal, profesor));
 			ventanaPrincipal.revalidate();
 			ventanaPrincipal.repaint();
 		});
