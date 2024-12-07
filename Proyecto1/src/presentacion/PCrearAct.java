@@ -12,6 +12,7 @@ public class PCrearAct extends JPanel {
     private Sistema sistema;
     private learningPath learningPath;
     private JPanel panelDinamico;
+    
 
     public PCrearAct(Sistema sistema, JFrame ventanaPrincipal, learningPath learningPath, Profesor profesor) {
         this.sistema = sistema;
@@ -23,6 +24,8 @@ public class PCrearAct extends JPanel {
         JLabel etiqueta = new JLabel("Crear Actividad para: " + learningPath.getTitulo(), SwingConstants.CENTER);
         etiqueta.setFont(new Font("Arial", Font.BOLD, 18));
         add(etiqueta, BorderLayout.NORTH);
+        
+        
 
         // Panel de botones para seleccionar el tipo de actividad
         JPanel panelBotones = new JPanel(new FlowLayout());
@@ -69,7 +72,7 @@ public class PCrearAct extends JPanel {
 
     private void mostrarFormularioTarea() {
         panelDinamico.removeAll();
-        //panelDinamico.add(new FormularioTarea(sistema, learningPath));
+        panelDinamico.add(new PCrearTarea(sistema, learningPath));
         panelDinamico.revalidate();
         panelDinamico.repaint();
     }

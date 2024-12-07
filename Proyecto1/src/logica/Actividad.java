@@ -105,14 +105,7 @@ public abstract class Actividad {
 
     @Override
     public String toString() {
-        return String.format("Actividad:\nDescripción\nObjetivo:\nDificultad:\n" +
-                             "Duración:\nFecha Límite:\nOpcional:\nCompletada:\n" +
-                             "Prerequisito Sugerido:",
-                nombre, descripcion, objetivo, nivelDificultad, duracion,
-                (fechaLimite != null ? fechaLimite.toString() : "Sin límite"),
-                (esOpcional ? "Si" : "No"),
-                (estado ? "Si" : "No"),
-                (prerequisitoSugerido != null ? prerequisitoSugerido.getNombre() : "Ninguno"));
+        return ("Titulo: "+this.getNombre()+"\nDescripción: "+ this.getDescripcion()+"\n Dificultad: "+this.getNivelDificultad()+"\n Es opcional: "+this.isEsOpcional());
     }
     
     

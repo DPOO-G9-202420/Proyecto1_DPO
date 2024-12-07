@@ -38,7 +38,7 @@ public class PVerLearningPath extends JPanel {
         // Panel de botones
         JPanel panelBotones = new JPanel(new FlowLayout());
 
-        JButton btnSeleccionar = new JButton("Seleccionar");
+        JButton btnSeleccionar = new JButton("Crear Actividad");
         JButton btnVolver = new JButton("Volver");
 
         // Acción al seleccionar un Learning Path
@@ -53,6 +53,22 @@ public class PVerLearningPath extends JPanel {
                 JOptionPane.showMessageDialog(this, "Por favor, seleccione un Learning Path de la lista.", "Error", JOptionPane.WARNING_MESSAGE);
             }
         });
+        
+        JButton btnVerActividades = new JButton("Ver Actividades");
+        btnVerActividades.addActionListener(e -> {
+        	int indiceSeleccionado = listaLearningPaths.getSelectedIndex();
+            if (indiceSeleccionado != -1) {
+                learningPath learningPathSeleccionado = learningPaths.get(indiceSeleccionado);
+                ventanaPrincipal.setContentPane(new PVerActividades(sistema, ventanaPrincipal, learningPathSeleccionado));
+                ventanaPrincipal.revalidate();
+                ventanaPrincipal.repaint();
+            } else {
+                JOptionPane.showMessageDialog(this, "Por favor, seleccione un Learning Path de la lista.", "Error", JOptionPane.WARNING_MESSAGE);
+            }
+        });
+                
+        	
+ 
 
         // Acción para volver al menú anterior
         btnVolver.addActionListener(e -> {
@@ -62,6 +78,7 @@ public class PVerLearningPath extends JPanel {
         });
 
         panelBotones.add(btnSeleccionar);
+        panelBotones.add(btnVerActividades);
         panelBotones.add(btnVolver);
         add(panelBotones, BorderLayout.SOUTH);
     }

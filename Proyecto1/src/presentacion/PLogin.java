@@ -33,7 +33,7 @@ public class PLogin extends JPanel {
                 JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos.");
             } else {
                 if (user instanceof Estudiante) {
-                    ventanaPrincipal.setContentPane(new PEstudiante((Estudiante) user, sistema, ventanaPrincipal));
+                    ventanaPrincipal.setContentPane(new PEstudiante(sistema, ventanaPrincipal,(Estudiante) user));
                 } else if (user instanceof Profesor) {
                     ventanaPrincipal.setContentPane(new PProfesor((Profesor) user, sistema, ventanaPrincipal));
                 }

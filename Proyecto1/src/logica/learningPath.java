@@ -124,9 +124,7 @@ public class learningPath {
 	 }
 	 
 	 public String toString() {
-		return "Titulo:  " + titulo + "\n" + 
-				"Descripción:  " + descripcion + "\n" + 
-				"Nivel de dificultad:  " + nivelDificultad + "\n";
+		return (this.getTitulo()+": "+this.getDescripcion()+" ("+this.getNivelDificultad()+")");
 		 
 	 }
 
