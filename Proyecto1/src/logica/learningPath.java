@@ -96,7 +96,6 @@ public class learningPath {
 	
 	public void agregarActividad(Actividad actividad) {
 		actividades.add(actividad);
-		actualizarFechaModificacion();
 	}
 	public boolean eliminarActividad(Actividad actividad) {
 		boolean eliminado= actividades.remove(actividad);
