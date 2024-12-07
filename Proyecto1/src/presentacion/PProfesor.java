@@ -37,7 +37,7 @@ public class PProfesor extends JPanel {
 		});
 		JButton botonVolver=new JButton("Cerrar sesión");
 		botonVolver.addActionListener(e ->{
-			ventanaPrincipal.setContentPane(new JPanel());
+			ventanaPrincipal.setContentPane(new PLogin(sistema, ventanaPrincipal));
 			ventanaPrincipal.revalidate();
 			ventanaPrincipal.repaint();
 		});

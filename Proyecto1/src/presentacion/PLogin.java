@@ -44,7 +44,7 @@ public class PLogin extends JPanel {
 
         btnCancelar.addActionListener(e -> {
             ventanaPrincipal.getContentPane().removeAll();
-            ventanaPrincipal.add(new VentPrincipal(sistema));
+            ventanaPrincipal.setContentPane(new VentPrincipal(sistema).getContentPane());
             ventanaPrincipal.revalidate();
             ventanaPrincipal.repaint();
         });
